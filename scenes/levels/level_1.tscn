@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ns83h82t6x8p"]
+[gd_scene load_steps=14 format=3 uid="uid://ns83h82t6x8p"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_65sl4"]
 [ext_resource type="PackedScene" uid="uid://c5etyehjh3t6v" path="res://scenes/players/ball.tscn" id="2_jmsfv"]
@@ -11,12 +11,20 @@
 [ext_resource type="PackedScene" uid="uid://tb6awd50ifrb" path="res://scenes/hud/game_hud.tscn" id="9_ct52q"]
 
 [sub_resource type="Environment" id="Environment_j2178"]
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.25
 volumetric_fog_albedo = Color(0.196078, 0.196078, 0.196078, 1)
 
 [sub_resource type="FogMaterial" id="FogMaterial_t7alm"]
 density = 2.0
 emission = Color(0.709804, 0.709804, 0.709804, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4e5c"]
+size = Vector3(8, 1, 4)
+
+[sub_resource type="FogMaterial" id="FogMaterial_ht1hh"]
+density = 0.8
+albedo = Color(0.356863, 0.819608, 1, 1)
 
 [node name="Level1" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
@@ -67,6 +75,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 5, 11)
 
 [node name="Coin3" parent="Level/Bonus" instance=ExtResource("7_kckby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 5, -17)
+
+[node name="Abilities" type="Node3D" parent="Level"]
+
+[node name="JumpZone" type="Area3D" parent="Level/Abilities" groups=["jump_zone"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2.35373, -2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Abilities/JumpZone"]
+shape = SubResource("BoxShape3D_a4e5c")
+
+[node name="FogVolume" type="FogVolume" parent="Level/Abilities/JumpZone"]
+extents = Vector3(4, 1, 2)
+material = SubResource("FogMaterial_ht1hh")
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_v4ekc")]
 

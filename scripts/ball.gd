@@ -7,8 +7,11 @@ extends RigidBody3D
 @export var joystick_sensitivity = 0.025
 @onready var camera: Marker3D = $CameraRig
 
+var coins
+
+
 func _ready() -> void:
-	pass
+	coins = 0
 
 
 func _physics_process(delta) -> void:
@@ -78,3 +81,9 @@ func _camera_follow() -> void:
 #		rotate_y(-event.relative.x * mouse_sensitivity)
 #		camera.rotate_y(-event.relative.y * mouse_sensitivity)
 #		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+
+
+func _on_area_3d_area_entered(area):
+	if area.is_in_group("coin"):
+		coins += 1
+		area.free()

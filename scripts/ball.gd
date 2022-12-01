@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	_camera_follow()
-	var move_direction: Vector3 = Vector3.ZERO
+#	var move_direction: Vector3 = Vector3.ZERO
 #	move_direction.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 #	move_direction.z = Input.get_action_strength("player_backward") - Input.get_action_strength("player_forward")
 #	move_direction = move_direction.rotated(Vector3.UP, camera.rotation.y).normalized()
@@ -86,4 +86,6 @@ func _camera_follow() -> void:
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("coin"):
 		coins += 1
+		var coins_count = "Coins : " + str(coins)
+		get_parent().get_parent().get_node("GameHUD/Control/LabelCoins").set("text", coins_count)
 		area.free()

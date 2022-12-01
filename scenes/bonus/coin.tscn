@@ -1,20 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddc74l4xjk488"]
+[gd_scene load_steps=6 format=3 uid="uid://ddc74l4xjk488"]
 
 [ext_resource type="ArrayMesh" uid="uid://drg2uf7aenhur" path="res://assets/models/bonus/Coin.obj" id="1_h7w3y"]
-
-[sub_resource type="GDScript" id="GDScript_d5nol"]
-script/source = "extends Area3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sw8hb"]
 size = Vector3(1.18067, 1.20189, 0.0610134)
@@ -58,7 +44,6 @@ _data = {
 }
 
 [node name="Coin" type="Area3D" groups=["coin"]]
-script = SubResource("GDScript_d5nol")
 
 [node name="Model" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_h7w3y")

@@ -5,7 +5,9 @@ extends RigidBody3D
 @export var jump_impulse = 1500
 @export var mouse_sensitivity = 0.005
 @export var joystick_sensitivity = 0.025
+
 @onready var camera: Marker3D = $CameraRig
+@onready var level_info = get_node("/root/LevelInfo")
 
 var coins
 
@@ -23,17 +25,7 @@ func _physics_process(delta) -> void:
 #
 #	angular_velocity.x = move_direction.x * rolling_force * delta
 #	angular_velocity.z = move_direction.z * rolling_force * delta
-	
-	if Input.is_action_pressed("player_forward"):
-		angular_velocity.z -= Input.get_action_strength("player_forward") * rolling_force * delta
-	elif Input.is_action_pressed("player_backward"):
-		angular_velocity.z += Input.get_action_strength("player_backward") * rolling_force * delta
-	if Input.is_action_pressed("player_left"):
-		angular_velocity.x -= Input.get_action_strength("player_left") * rolling_force * delta
-	elif Input.is_action_pressed("player_right"):
-		angular_velocity.x += Input.get_action_strength("player_right") * rolling_force * delta
-#	angular_velocity = angular_velocity.rotated(Vector3.UP, camera.rotation.y)
-	
+#
 #	if Input.is_action_pressed("player_forward"):
 #		move_direction.z -= rolling_force * delta
 #	elif Input.is_action_pressed("player_backward"):
@@ -46,6 +38,15 @@ func _physics_process(delta) -> void:
 #
 #	angular_velocity.x = move_direction.x * rolling_force
 #	angular_velocity.z = move_direction.z * rolling_force
+	
+	if Input.is_action_pressed("player_forward"):
+		angular_velocity.z -= Input.get_action_strength("player_forward") * rolling_force * delta
+	elif Input.is_action_pressed("player_backward"):
+		angular_velocity.z += Input.get_action_strength("player_backward") * rolling_force * delta
+	if Input.is_action_pressed("player_left"):
+		angular_velocity.x -= Input.get_action_strength("player_left") * rolling_force * delta
+	elif Input.is_action_pressed("player_right"):
+		angular_velocity.x += Input.get_action_strength("player_right") * rolling_force * delta
 
 	if Input.is_action_pressed("camera_up"):
 		camera.rotate(Vector3.BACK, Input.get_action_strength("camera_up") * joystick_sensitivity)
